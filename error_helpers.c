@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * errorAtoi - converts a string to an integer
+ * _erratoi - converts a string to an integer
  * @s: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
  *       -1 on error
  */
-int errorAtoi(char *s)
+int _erratoi(char *s)
 {
 	int i = 0;
 	unsigned long int result = 0;
@@ -29,71 +29,71 @@ int errorAtoi(char *s)
 }
 
 /**
- * printErrorMessage - prints an error message
+ * print_error - prints an error message
  * @info: the parameter & return info struct
- * @errorString: string containing specified error type
+ * @estr: string containing specified error type
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */
-void printErrorMessage(info_t *info, char *errorString)
+void print_error(info_t *info, char *estr)
 {
-	customErrorPuts(info->fname);
-	customErrorPuts(": ");
-	printDecimal(info->line_count, STDERR_FILENO);
-	customErrorPuts(": ");
-	customErrorPuts(info->argv[0]);
-	customErrorPuts(": ");
-	customErrorPuts(errorString);
+	_eputs(info->fname);
+	_eputs(": ");
+	print_d(info->line_count, STDERR_FILENO);
+	_eputs(": ");
+	_eputs(info->argv[0]);
+	_eputs(": ");
+	_eputs(estr);
 }
 
 /**
- * printDecimal - function prints a decimal (integer) number (base 10)
+ * print_d - function prints a decimal (integer) number (base 10)
  * @input: the input
- * @fd: the file descriptor to write to
+ * @fd: the filedescriptor to write to
  *
  * Return: number of characters printed
  */
-int printDecimal(int input, int fd)
+int print_d(int input, int fd)
 {
-	int (*customPutchar)(char) = customPutchar;
+	int (*__putchar)(char) = _putchar;
 	int i, count = 0;
-	unsigned int absoluteValue, current;
+	unsigned int _abs_, current;
 
 	if (fd == STDERR_FILENO)
-		customPutchar = customErrorPutchar;
+		__putchar = _eputchar;
 	if (input < 0)
 	{
-		absoluteValue = -input;
-		customPutchar('-');
+		_abs_ = -input;
+		__putchar('-');
 		count++;
 	}
 	else
-		absoluteValue = input;
-	current = absoluteValue;
+		_abs_ = input;
+	current = _abs_;
 	for (i = 1000000000; i > 1; i /= 10)
 	{
-		if (absoluteValue / i)
+		if (_abs_ / i)
 		{
-			customPutchar('0' + current / i);
+			__putchar('0' + current / i);
 			count++;
 		}
 		current %= i;
 	}
-	customPutchar('0' + current);
+	__putchar('0' + current);
 	count++;
 
 	return (count);
 }
 
 /**
- * convertNumber - converter function, a clone of itoa
+ * convert_number - converter function, a clone of itoa
  * @num: number
  * @base: base
  * @flags: argument flags
  *
  * Return: string
  */
-char *convertNumber(long int num, int base, int flags)
+char *convert_number(long int num, int base, int flags)
 {
 	static char *array;
 	static char buffer[50];
@@ -122,12 +122,12 @@ char *convertNumber(long int num, int base, int flags)
 }
 
 /**
- * removeComments - function replaces first instance of '#' with '\0'
+ * remove_comments - function replaces first instance of '#' with '\0'
  * @buf: address of the string to modify
  *
  * Return: Always 0;
  */
-void removeComments(char *buf)
+void remove_comments(char *buf)
 {
 	int i;
 
