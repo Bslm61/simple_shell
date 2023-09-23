@@ -1,31 +1,31 @@
 #include "shell.h"
 
 /**
- * customStrlen - returns the length of a string
+ * _strlen - returns the length of a string
  * @s: the string whose length to check
  *
- * Return: integer length of the string
+ * Return: integer length of string
  */
-int customStrlen(char *s)
+int _strlen(char *s)
 {
-	int length = 0;
+	int i = 0;
 
 	if (!s)
 		return (0);
 
 	while (*s++)
-		length++;
-	return (length);
+		i++;
+	return (i);
 }
 
 /**
- * customStrcmp - performs lexicographic comparison of two strings.
- * @s1: the first string
- * @s2: the second string
+ * _strcmp - performs lexicogarphic comparison of two strangs.
+ * @s1: the first strang
+ * @s2: the second strang
  *
  * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
  */
-int customStrcmp(char *s1, char *s2)
+int _strcmp(char *s1, char *s2)
 {
 	while (*s1 && *s2)
 	{
@@ -41,13 +41,13 @@ int customStrcmp(char *s1, char *s2)
 }
 
 /**
- * customStartsWith - checks if needle starts with haystack
+ * starts_with - checks if needle starts with haystack
  * @haystack: string to search
  * @needle: the substring to find
  *
- * Return: address of the next character of haystack or NULL
+ * Return: address of next char of haystack or NULL
  */
-char *customStartsWith(const char *haystack, const char *needle)
+char *starts_with(const char *haystack, const char *needle)
 {
 	while (*needle)
 		if (*needle++ != *haystack++)
@@ -56,13 +56,13 @@ char *customStartsWith(const char *haystack, const char *needle)
 }
 
 /**
- * customStrcat - concatenates two strings
+ * _strcat - concatenates two strings
  * @dest: the destination buffer
  * @src: the source buffer
  *
- * Return: pointer to the destination buffer
+ * Return: pointer to destination buffer
  */
-char *customStrcat(char *dest, char *src)
+char *_strcat(char *dest, char *src)
 {
 	char *ret = dest;
 
